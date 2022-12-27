@@ -1,3 +1,5 @@
+// DOCUMENTATION -> https://documenter.getpostman.com/view/17956788/2s8Z6x3DhN
+
 import dotenv from 'dotenv'
 import express, { Application } from "express";
 import cookieParser from 'cookie-parser'
