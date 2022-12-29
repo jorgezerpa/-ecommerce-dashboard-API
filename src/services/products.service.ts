@@ -17,24 +17,25 @@ const productService = {
         const filter = productsfilter(filterOptions)
         const merchant = await merchantModel.findOne({where:{id:merchantId}, relations:{products:true}})
         if(!merchant) throw boom.notFound('user not found')
-        if(!merchant.products || merchant.products.length<=0 )throw boom.notFound("not products created") 
+        if(!merchant.products)throw boom.notFound("error getting products.") 
         const products = productModel.find({where:{merchant:merchant, ...filter}, relations:{categories:true}})       
+        if(!products)throw boom.notFound("error getting products.") 
         return products
     },
     getByCategory: async function(merchantId:number, categoryId:number){
         const merchant = await merchantModel.findOne({where:{id:merchantId}, relations:{products:true, categories:true}})
         if(!merchant) throw boom.notFound('merchant not found')
-        if(!merchant.products || merchant.products.length<=0 )throw boom.notFound("not products created") 
+        if(!merchant.products)throw boom.notFound("error getting products") 
         const categoryIndex = merchant.categories?.findIndex(category=>category.id===categoryId)
         if(categoryIndex===-1) throw boom.notFound('category not found')
         const products = await productModel.find({ where: { categories:{id:categoryId}, merchant:merchant }, relations:{categories:true}})
-        if(!products || products.length<=0) throw boom.notFound('this categories do not have products')
+        if(!products) throw boom.notFound('error getting products')
         return products
     },
     findOne: async function(merchantId:number, productId: number){
         const merchant = await merchantModel.findOne({where:{id:merchantId}, relations:{products:true}})
         if(!merchant) throw boom.notFound('user not found')
-        if(!merchant.products || merchant.products.length<=0 )throw boom.notFound("not products created")        
+        if(!merchant.products)throw boom.notFound("error getting products.")        
         const productIndex = merchant.products.findIndex(product=>product.id===productId)
         if(productIndex===-1) throw boom.notFound('product not found')
         const product = merchant.products[productIndex]

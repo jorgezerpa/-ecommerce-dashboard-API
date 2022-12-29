@@ -14,7 +14,7 @@ const productModel = AppDataSource.getRepository(Product)
 const ordersService = {
     get: async function(merchantId:number){
         const orders = await orderModel.find({where:{merchant:{ id: merchantId } }})
-        if(!orders || orders.length<=0) throw boom.notFound('order not found')
+        if(!orders) throw boom.notFound('error getting orders.')
         return orders
     },
     getOne: async function(orderId:number, merchantId:number){

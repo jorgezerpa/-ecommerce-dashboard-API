@@ -15,7 +15,7 @@ const categoryService = {
     get: async function(merchantId:number){
         const merchant = await merchantModel.findOne({where:{id:merchantId}, relations:{categories:true}})
         if(!merchant) throw boom.notFound('user not found')
-        if(!merchant.categories || merchant.categories.length<=0 )throw boom.notFound("not categories created")        
+        if(!merchant.categories )throw boom.notFound("error getting categories.")        
         return merchant.categories
     },
     findOne: async function(merchantId:number, categoryId: number){
