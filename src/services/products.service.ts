@@ -15,7 +15,7 @@ const PRODUCTS_FOLDER = 'products'
 const productService = {
     get: async function(merchantId:number, filterOptions:ProductsFilterQuery={}){
         const filter = productsfilter(filterOptions)
-        const merchant = await merchantModel.findOne({where:{id:merchantId}, relations:{products:true}})
+        const merchant = await merchantModel.findOne({where:{id:merchantId}, relations:{products:true, extraFields:true}})
         if(!merchant) throw boom.notFound('user not found')
         if(!merchant.products)throw boom.notFound("error getting products.") 
         const products = productModel.find({where:{merchant:merchant, ...filter}, relations:{categories:true}})       

@@ -4,6 +4,7 @@ import { Category } from "./category"
 import { PaymentMethod } from "./paypmentMethod"
 import { Product } from "./product"
 import { Order } from "./order"
+import { ExtraField } from './extraField'
 
 @Entity()
 export class Merchant {
@@ -27,6 +28,9 @@ export class Merchant {
     
     @OneToMany(() => Order, (order) => order.merchant)
     orders?: Relation<Order[]>
+    
+    @OneToMany(() => ExtraField, (extraField) => extraField.merchant, { cascade:true })
+    extraFields?: Relation<ExtraField[]>
 
     @ManyToMany(() => PaymentMethod, (paymentMethod) => paymentMethod.merchants, {cascade:true})
     @JoinTable()

@@ -18,7 +18,7 @@ const merchantService = {
         return result
     },
     findOne: async function(merchantId: number){
-        const merchant = await merchantModel.findOneBy({id:merchantId})
+        const merchant = await merchantModel.findOne({where:{id:merchantId}, relations:{extraFields:true}},)
         if(!merchant){
             throw boom.notFound('merchant not found')
         }

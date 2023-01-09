@@ -6,6 +6,7 @@ import { AuthMerchant } from "./authMerchant";
 import { Shipping } from "./shipping";
 import { Order } from "./order";
 import { Cart } from './cart'
+import { ExtraField } from "./extraField";
 
 export  {
     Product,
@@ -16,6 +17,7 @@ export  {
     Shipping,
     Order,
     Cart,
+    ExtraField
 }
 
 

@@ -1,5 +1,6 @@
 import Joi, { boolean, required } from 'joi'
 
+
 const id=Joi.number();
 const name=Joi.string().min(3).max(30);
 const description=Joi.string().max(100);
@@ -13,7 +14,7 @@ const createProductSchema=Joi.object({
     description: description.required(),
     price: price.required(),
     quantity: quantity.required(),
-    image: image
+    image: image,
 });
 
 const updateProductSchema=Joi.object({
@@ -21,7 +22,7 @@ const updateProductSchema=Joi.object({
     description: description,
     price: price,
     quantity: quantity,
-    image: image
+    image: image,
 });
 
 const filterProductSchema=Joi.object({
